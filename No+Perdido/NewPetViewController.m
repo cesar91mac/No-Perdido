@@ -65,6 +65,7 @@
                 Connection *myCon = [[Connection alloc]init];
                 
                 NSData *encodedOwner = [[NSUserDefaults standardUserDefaults] objectForKey:@"credentials"];
+                
                 Owner *userInfo = (Owner *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedOwner];
                 
                 
@@ -157,7 +158,7 @@
     
     if([res isEqualToString:@"-1"])
     {
-        title = @"Email inválido";
+        title = @"Teléfono Inválido";
         message = [NSString stringWithFormat: @"Ya existe una mascota vinculada con el número %@ \nPor favor intenta nuevamente.",self.pet.simNumber];
     }
     else if([res isEqualToString:@"ERROR"])

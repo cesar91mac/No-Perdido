@@ -140,6 +140,7 @@
 				228A1D23183E9FA6000B8514 /* Connection.m */,
 			);
 			name = Connection;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		BA0A192B1811BCE90078C823 /* Owner */ = {
@@ -212,7 +213,6 @@
 		BAE2ACE4180CF495003D64F6 = {
 			isa = PBXGroup;
 			children = (
-				228A1D26183E9FAE000B8514 /* Connection */,
 				BAE2ACF6180CF495003D64F6 /* No+Perdido */,
 				BAE2AD0F180CF495003D64F6 /* No+PerdidoTests */,
 				BAE2ACEF180CF495003D64F6 /* Frameworks */,
@@ -250,6 +250,7 @@
 				BA69B108181768B300FF3900 /* Storyboard.storyboard */,
 				BAE459731834613200209705 /* InputValidator.h */,
 				BAE459741834613200209705 /* InputValidator.m */,
+				228A1D26183E9FAE000B8514 /* Connection */,
 				BAA39E021862213900CD14AC /* Locate */,
 				BA20820E182231CA008EBF0D /* Persistent Storage */,
 				BA0A19381811F0B40078C823 /* Log in */,

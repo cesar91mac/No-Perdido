@@ -14,6 +14,9 @@
 
 @interface LocateViewController ()
 
+
+@property (nonatomic, strong) NSMutableArray *thePetInPanicList;
+
 @end
 
 @implementation LocateViewController
@@ -23,6 +26,48 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"PetList.plist"];
+    
+    NSMutableArray *tempArray = [NSMutableArray array];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) { //defaultManager es un método de clase que crea una instancia de NSFilManager
+        
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        
+        tempArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+    }
+    
+    Connection *myCon = [[Connection alloc] init];
+    
+    
+    for (Pet *thePet in tempArray) {
+        
+        if (thePet.panic) {
+            
+            NSMutableDictionary *param1 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:thePet.simNumber,@"phone", nil];
+            
+            [myCon response:8 parameters:param1];
+            
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                
+                while ([myCon.APIResult isEqualToString:@"NOYET"])
+                {            }
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self validate:myCon.APIResult petData:myCon.JSONResult petName:thePet.name];
+                });
+            });
+        }
+    }
+    
+    
+    
 }
 
 
